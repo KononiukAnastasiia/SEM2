@@ -234,7 +234,7 @@ function run() {
   const grav  = parseFloat(document.getElementById('gravity').value) || G_DEFAULT;
 
   if (isNaN(v0) || v0 <= 0 || v0 > 500) { showError('Введіть коректну початкову швидкість (1–500 м/с)'); return; }
-  if (isNaN(angle) || angle <= 0 || angle >= 90) { showError('Введіть коректний кут кидання (1°–89°)'); return; }
+  if (isNaN(angle) || angle <= 0 || angle >= 91) { showError('Введіть коректний кут кидання (1°–90°)'); return; }
 
   // Розрахунок обох траєкторій
   const normal   = calculateTrajectory(v0, angle, grav);
