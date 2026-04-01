@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Лабораторна робота №2 — Рух тіла під кутом до горизонту</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Моделювання руху тіла, кинутого під кутом до горизонту</h1>
+    <p class="subtitle">Лабораторна робота №2 </p>
+  </header>
+
+  <main>
+    <div class="layout">
+      <aside class="controls">
+        <h2>Параметри кидка</h2>
+        <div class="field">
+          <label for="velocity">Початкова швидкість v₀ (м/с)</label>
+          <input type="range" id="velocityRange" min="10" max="200" value="50" step="1" />
+          <div class="range-row">
+            <span class="range-min">10</span>
+            <input type="number" id="velocity" min="1" max="500" value="50" step="1" />
+            <span class="range-max">200</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="angle">Кут кидання β (градуси)</label>
+          <input type="range" id="angleRange" min="1" max="89" value="45" step="1" />
+          <div class="range-row">
+            <span class="range-min">1°</span>
+            <input type="number" id="angle" min="1" max="89" value="45" step="1" />
+            <span class="range-max">89°</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Прискорення g (м/с²)</label>
+          <input type="number" id="gravity" value="9.81" step="0.01" readonly />
+        </div>
+        <button id="btnLaunch">🚀 Запустити</button>
+        <button id="btnReset" class="secondary">↺ Скинути</button>
+        <div class="formulas">
+          <h3>Формули</h3>
+          <div class="formula-item"><span class="formula-label">Час польоту:</span><span class="formula-text">T = 2·v₀·sin(β) / g</span></div>
+          <div class="formula-item"><span class="formula-label">Максимальна висота:</span><span class="formula-text">h = v₀²·sin²(β) / (2g)</span></div>
+          <div class="formula-item"><span class="formula-label">Дальність польоту:</span><span class="formula-text">l = v₀²·sin(2β) / g</span></div>
+          <div class="formula-item"><span class="formula-label">x(t) =</span><span class="formula-text">v₀·cos(β)·t</span></div>
+          <div class="formula-item"><span class="formula-label">y(t) =</span><span class="formula-text">v₀·sin(β)·t − g·t²/2</span></div>
+        </div>
+      </aside>
+
+      <section class="visualization">
+        <div class="results" id="results">
+          <div class="result-card" id="res-time">
+            <div class="res-icon">⏱</div><div class="res-value">—</div><div class="res-label">Час польоту (с)</div>
+          </div>
+          <div class="result-card" id="res-height">
+            <div class="res-icon">📐</div><div class="res-value">—</div><div class="res-label">Макс. висота (м)</div>
+          </div>
+          <div class="result-card" id="res-range">
+            <div class="res-icon">📏</div><div class="res-value">—</div><div class="res-label">Дальність польоту (м)</div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-wrap">
+            <div class="chart-title">
+              <span class="chart-badge normal">↗</span>
+              Звичайний кидок (кут +β)
+            </div>
+            <div id="chart"></div>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-title">
+              <span class="chart-badge inverted">↙</span>
+              Перевернута траєкторія (кут −β)
+            </div>
+            <div id="chart-inverted"></div>
+          </div>
+        </div>
+
+        <div id="error-msg" class="error hidden"></div>
+      </section>
+    </div>
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
